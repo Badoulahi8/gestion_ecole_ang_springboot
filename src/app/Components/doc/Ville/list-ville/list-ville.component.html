@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-sm-9">
+      <section class="card">
+          <header class="card-header">
+                Liste des Ville
+                 &nbsp;<a class="btn btn-outline-primary" routerLink="/villes/add">Ajouter une nouvelle Ville</a>
+          </header>
+          <table class="table table-striped table-advance table-hover">
+              <thead>
+              <tr>
+                  <th></th>
+                  <th><i class="fa fa-bookmark"></i> NOM</th>
+                  <th></th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor ="let ville of villes">
+                    <td width="20%"></td>
+                    <td width="50%"><span class="hidden-phone">{{ville.nom}}</span></td>
+                    <td width="30%">
+                      <button class="btn btn-primary btn-sm" (click)="updateVille(ville.id)"><i class="fa fa-pencil"></i></button>
+                      &nbsp;&nbsp;
+                      <button class="btn btn-danger btn-sm" (click)="deleteVille(ville.id)"><i class="fa fa-trash-o"></i></button>
+                    </td>
+                </tr>
+              </tbody>
+          </table>
+      </section>
+  </div>
+</div>

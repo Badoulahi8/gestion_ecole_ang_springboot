@@ -1,0 +1,26 @@
+<aside>
+  <div id="sidebar"  class="nav-collapse ">
+      <!-- sidebar menu start-->
+      <ul class="sidebar-menu" id="nav-accordion">
+        <li>
+            <a href="">
+                <i class="fa fa-dashboard"></i>
+                <span>MENU PRINCIPAL</span>
+            </a>
+        </li>
+
+        <li class="sub-menu">
+            <a href="javascript:;">
+                <i class="fa fa-arrows"></i>
+                <span>Villes</span>
+            </a>
+            <ul class="sub">
+                <li><a [routerLink]="['/villes/add']">Ajouter</a></li>
+                <li><a [routerLink]="['/villes/list']">Lister</a></li>
+            </ul>
+        </li>
+
+      </ul>
+      <!-- sidebar menu end-->
+  </div>
+</aside>
