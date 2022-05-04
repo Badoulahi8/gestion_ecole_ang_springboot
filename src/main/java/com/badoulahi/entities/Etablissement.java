@@ -1,5 +1,6 @@
 package com.badoulahi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,7 @@ public class Etablissement implements Serializable {
     @Column(length = 50)
     private String adresse ;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private Ville ville = new Ville() ;
 
