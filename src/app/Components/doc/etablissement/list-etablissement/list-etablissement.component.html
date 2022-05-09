@@ -9,18 +9,24 @@
               <thead>
               <tr>
                   <th></th>
+                  <th><i class="fa fa-bookmark"></i> CODE</th>
                   <th><i class="fa fa-bookmark"></i> NOM</th>
+                  <th><i class="fa fa-bookmark"></i> ADRESSE</th>
+                  <th><i class="fa fa-bookmark"></i> VILLE</th>
                   <th></th>
               </tr>
               </thead>
               <tbody>
                 <tr *ngFor ="let etablissement of etablissements">
-                    <td width="20%"></td>
-                    <td width="50%"><span class="hidden-phone">{{etablissement.nom}}</span></td>
-                    <td width="30%">
-                      <button class="btn btn-primary btn-sm" ><i class="fa fa-pencil"></i></button>
-                      &nbsp;&nbsp;
-                      <button class="btn btn-danger btn-sm" ><i class="fa fa-trash-o"></i></button>
+                    <td></td>
+                    <td><span class="hidden-phone">{{etablissement.code}}</span></td>
+                    <td><span class="hidden-phone">{{etablissement.nom}}</span></td>
+                    <td><span class="hidden-phone">{{etablissement.adresse}}</span></td>
+                    <td><span class="hidden-phone">{{etablissement.ville.nom}}</span></td>
+                    <td>
+                      <button class="btn btn-primary btn-sm" (click)="updateEtablissement(etablissement.id)"><i class="fa fa-pencil"></i></button>
+                        &nbsp;&nbsp;
+                      <button class="btn btn-danger btn-sm" (click)="deleteEtablissement(etablissement.id)"><i class="fa fa-trash-o"></i></button>
                     </td>
                 </tr>
               </tbody>

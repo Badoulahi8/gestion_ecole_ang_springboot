@@ -8,7 +8,7 @@ export class Etablissement {
   eleves: any ;
   ville: Ville = new Ville() ;
   enseignants: any ;
-
+  idVille: number =0 ;
   constructor() {
   }
 }

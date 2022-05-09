@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Etablissement } from '../shared/model/etablissement';
-import { EtablissementServiceService } from '../shared/service/etablissement-service.service';
+import { EtablissementService } from '../shared/service/etablissement.service';
 
 @Component({
   selector: 'app-list-etablissement',
@@ -10,8 +11,10 @@ import { EtablissementServiceService } from '../shared/service/etablissement-ser
 export class ListEtablissementComponent implements OnInit {
 
   etablissements : Etablissement[] =  [];
+
   constructor(
-    private etablissementService: EtablissementServiceService
+    private etablissementService: EtablissementService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +25,14 @@ export class ListEtablissementComponent implements OnInit {
     this.etablissementService.getEtablissementsList().subscribe(data => {
       this.etablissements = data ;
     });
+  }
+
+  updateEtablissement(id: number){
+    this.router.navigate(['/etablissements/update', id])
+  }
+
+  deleteEtablissement(id: number){
+    console.log("Suppréssion eta :"+ id)
   }
 
 }
