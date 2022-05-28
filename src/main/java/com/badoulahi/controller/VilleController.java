@@ -4,6 +4,7 @@ import com.badoulahi.dao.IVille;
 import com.badoulahi.entities.Ville;
 import com.badoulahi.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,12 @@ public class VilleController {
         return villeDao.findAll() ;
     }
 
+    @GetMapping("/villesExceptId/{id}")
+    public List<Ville> getAllVillesExceptId(@PathVariable int id)
+    {
+        return villeDao.getVilleExceptId(id) ;
+    }
+
     @GetMapping("/villes/{id}")
     public ResponseEntity<Ville> getVille(@PathVariable int id)
     {
@@ -31,14 +38,15 @@ public class VilleController {
     }
 
     @PostMapping("/villes")
-    public Ville createVille(@RequestBody Ville ville)
+    public ResponseEntity<Ville> createVille(@RequestBody Ville ville)
     {
         if(villeDao.getVilleByNom(ville.getNom()) == null) {
-            return villeDao.save(ville);
+            villeDao.save(ville);
+            return new ResponseEntity<Ville>(ville, HttpStatus.CREATED);
         }
         else
         {
-            return null ;
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
@@ -47,7 +55,6 @@ public class VilleController {
     {
         Ville ville = villeDao.findById(id).orElseThrow(()-> new ResourceNotFoundException("Ville non trouvée")) ;
         ville.setNom(villeupdate.getNom());
-       // ville.setEtablissements(villeupdate.getEtablissements());
 
         villeDao.save(ville) ;
 

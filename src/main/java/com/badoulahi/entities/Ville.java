@@ -23,6 +23,4 @@ public class Ville implements Serializable {
     @Column(length = 40, unique = true)
     private String nom ;
 
-    @OneToMany(mappedBy = "ville", cascade=CascadeType.ALL)
-    private List<Etablissement> etablissements = new ArrayList<Etablissement>();
 }

@@ -26,6 +26,14 @@ public class EtablissementController {
     private List<Etablissement> getAllEtablissement()
     {
         return etablissementDao.findAll() ;
+        //return etablissementDao.getEtablissementExceptId(15) ;
+    }
+
+    @GetMapping("/etablissements/{id}")
+    private ResponseEntity<Etablissement> getEtablissement(@PathVariable int id)
+    {
+        Etablissement etablissement = etablissementDao.findById(id).orElseThrow( ()-> new ResourceNotFoundException("Etablissement non trouve")) ;
+        return ResponseEntity.ok(etablissement) ;
     }
 
     @PostMapping("/etablissements/{idVille}")
@@ -35,7 +43,14 @@ public class EtablissementController {
             etablissement.setVille(ville);
             return etablissementDao.save(etablissement);
         }).orElseThrow(() -> new ResourceNotFoundException("Ville non trouvée avec l'id " + idVille));
-        return new ResponseEntity<>(etablissementSave, HttpStatus.CREATED);
+        return new ResponseEntity<Etablissement>(etablissementSave, HttpStatus.CREATED);
+    }
 
+    @DeleteMapping("/etablissements/{id}")
+    private ResponseEntity<Etablissement> deleteEtablissement(@PathVariable int id)
+    {
+        Etablissement etablissement = etablissementDao.findById(id).orElseThrow( ()-> new ResourceNotFoundException("Etablissement non trouve")) ;
+        etablissementDao.delete(etablissement);
+        return ResponseEntity.ok(etablissement) ;
     }
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -31,8 +33,9 @@ public class Etablissement implements Serializable {
     @Column(length = 50)
     private String adresse ;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Ville ville = new Ville() ;
 
     @OneToMany(mappedBy = "etablissement", cascade=CascadeType.ALL)
