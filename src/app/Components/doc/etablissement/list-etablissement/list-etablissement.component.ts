@@ -18,10 +18,10 @@ export class ListEtablissementComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getVillesEtablissement() ;
+    this.getListEtablissement() ;
   }
 
-  private getVillesEtablissement(){
+  private getListEtablissement(){
     this.etablissementService.getEtablissementsList().subscribe(data => {
       this.etablissements = data ;
     });
@@ -32,7 +32,14 @@ export class ListEtablissementComponent implements OnInit {
   }
 
   deleteEtablissement(id: number){
-    console.log("Suppréssion eta :"+ id)
+    if(confirm("Etes-vous sùre de vouloir supprimer cette etablissement ? ")) {
+      this.etablissementService.deleteEtablissement(id).subscribe(data =>{
+      this.getListEtablissement() ;
+    },
+    error => {
+      console.log(error) ;
+    }) ;
+    }
   }
 
 }

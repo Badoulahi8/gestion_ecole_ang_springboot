@@ -6,9 +6,11 @@ export class Etablissement {
   nom: string = "" ;
   adresse: string = "" ;
   eleves: any ;
+  idVille: number = 0 ;
   ville: Ville = new Ville() ;
+
   enseignants: any ;
-  idVille: number =0 ;
+
   constructor() {
   }
 }

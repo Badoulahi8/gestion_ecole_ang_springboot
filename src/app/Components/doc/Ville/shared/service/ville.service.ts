@@ -18,6 +18,13 @@ export class VilleService {
     ) ;
   }
 
+  getVillesListExceptId(id: number) : Observable<Ville[]>{
+    return this.httpClient.get<Ville[]>(`${this.baseURL}`+`ExceptId/`+id).pipe(
+       /* tap(villes => console.log('Villes: ', villes)), */
+      catchError(this.handleError)
+    ) ;
+  }
+
   getVille(id: number) : Observable<Ville>{
     return this.httpClient.get<Ville>(`${this.baseURL}/${id}`) ;
   }

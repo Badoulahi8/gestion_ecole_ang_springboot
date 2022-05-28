@@ -11,9 +11,12 @@ import { EtablissementService } from '../shared/service/etablissement.service';
   styleUrls: ['./add-etablissement.component.scss']
 })
 export class AddEtablissementComponent implements OnInit {
-  villes : Ville[] = []
+  villes : Ville[] = [] ;
+
   ville: Ville = new Ville() ;
+
   etablissement: Etablissement = new Etablissement() ;
+
   constructor(
     private villeService: VilleService,
     private etablissementService: EtablissementService,
@@ -40,7 +43,6 @@ export class AddEtablissementComponent implements OnInit {
       console.log(error)
     }
     )
-
   }
 
 }
