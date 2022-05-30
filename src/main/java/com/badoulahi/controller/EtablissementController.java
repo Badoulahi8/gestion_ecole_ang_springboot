@@ -53,4 +53,18 @@ public class EtablissementController {
         etablissementDao.delete(etablissement);
         return ResponseEntity.ok(etablissement) ;
     }
+
+    @PutMapping("etablissements/{id}/{idVille}")
+    public ResponseEntity<Etablissement> updateEtablissement(@PathVariable(value = "id") int id, @RequestBody Etablissement etablissementupdate, @PathVariable(value = "idVille") int idVille)
+    {
+        Etablissement etablissement = etablissementDao.findById(id).orElseThrow(()-> new ResourceNotFoundException("Etablissement non trouvée")) ;
+        etablissement.setNom(etablissementupdate.getNom());
+        etablissement.setCode(etablissementupdate.getCode());
+        etablissement.setAdresse(etablissementupdate.getAdresse());
+
+        Ville ville = villeDao.findById(idVille).orElseThrow(()-> new ResourceNotFoundException("Ville non trouvée")) ;
+        etablissement.setVille(ville);
+        etablissementDao.save(etablissement);
+        return new ResponseEntity<Etablissement>(etablissement, HttpStatus.CREATED);
+    }
 }
