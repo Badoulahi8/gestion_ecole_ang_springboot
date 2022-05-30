@@ -32,8 +32,8 @@ export class EtablissementService {
     ) ;
   }
 
-  updateEtablissement(id: number, etablissement: Etablissement) : Observable<Object>{
-    return this.httpClient.put(`${this.baseURL}/${id}`, etablissement).pipe(
+  updateEtablissement(id: number, etablissement: Etablissement, idVille: number) : Observable<Object>{
+    return this.httpClient.put(`${this.baseURL}/${id}/${idVille}`, etablissement).pipe(
       tap(etablissement => {
         alert('Modification etablissement reussie')
       }),

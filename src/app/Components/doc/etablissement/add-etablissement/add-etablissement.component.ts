@@ -35,7 +35,6 @@ export class AddEtablissementComponent implements OnInit {
   }
 
   createEtablissement(){
-
     this.etablissementService.createEtablissement(this.etablissement, this.etablissement.idVille).subscribe(data => {
       this.router.navigate(["/etablissements"])
     },

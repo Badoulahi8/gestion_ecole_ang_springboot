@@ -21,21 +21,40 @@ export class UpdateEtablissementComponent implements OnInit {
     private router : Router
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
 
     this.id = this.route.snapshot.params['id'] ;
-    this.etablissementService.getEtablissement(this.id).subscribe( data => {
-      this.etablissement = data ;
+    this.etablissementService.getEtablissement(this.id).subscribe(data => {
+      this.etablissement = data
+    },
+      error => {
+        console.log(error);
+      })
+
+    this.villeService.getVillesListExceptId(this.etablissement.idVille).subscribe(data => {
+      this.villes = data ;
     },
     error => {
       console.log(error)
-    })
+    }
+    )
+
   }
 
-  onSubmit()
-  {
-    console.log(this.etablissement.idVille)
-  }
+
+  onSubmit(){
+    this.updateEtablissement();
+   }
+
+   updateEtablissement(){
+     this.etablissementService.updateEtablissement(this.id, this.etablissement, this.etablissement.idVille).subscribe(data => {
+       this.router.navigate(["/etablissements"])
+     },
+     error => {
+       console.log(error)
+     }
+     )
+   }
 
 }
